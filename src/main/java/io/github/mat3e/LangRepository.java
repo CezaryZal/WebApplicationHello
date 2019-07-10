@@ -1,21 +1,18 @@
 package io.github.mat3e;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class LangRepository {
-    private List<Lang> languages;
 
-    LangRepository (){
-        languages = new ArrayList<>();
-        languages.add(new Lang (1L, "Hello", "en"));
-        languages.add(new Lang (2L, "Dobry", "pl"));
-    }
+    Optional<Lang> findById (Integer id){
+        var sesion = HibernateUtil.getSessionFactory().openSession();
+        var transaction = sesion.beginTransaction();
 
-    Optional<Lang> findById (Long id){
-        return languages.stream()
-                .filter(l -> l.getId().equals(id))
-                .findFirst();
+        var result = sesion.get(Lang.class, id);
+
+        transaction.commit();
+        sesion.close();
+
+        return Optional.ofNullable(result);
     }
 }
