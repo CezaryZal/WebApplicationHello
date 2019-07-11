@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 @WebServlet(name = "hello", urlPatterns = "/api/*") //gwiazdka umożliwia odpalenie `hello` nie zależnie co jest dalej
 public class HelloServlet extends HttpServlet {
@@ -36,7 +37,13 @@ public class HelloServlet extends HttpServlet {
 
         var name = req.getParameter(NAME_PARAM);
         var lang = req.getParameter(LANG_PARAM);
-        var greeting = service.prepareGreeting(name, lang);
+        Integer langId = null;
+        try {
+            langId = Integer.valueOf(lang);
+        } catch (NumberFormatException e){
+            logger.warn("Non-numeric language id used: " + lang);
+        }
+        var greeting = service.prepareGreeting(name, langId);
         resp.getWriter().write(greeting);
 
         //resp.getWriter().write(service.prepareGreeting(req.getParameter(NAME_PARAM)));

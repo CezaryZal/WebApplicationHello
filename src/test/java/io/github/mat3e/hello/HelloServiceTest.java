@@ -1,10 +1,10 @@
 package io.github.mat3e.hello;
 
-import io.github.mat3e.hello.HelloService;
 import io.github.mat3e.lang.Lang;
 import io.github.mat3e.lang.LangRepository;
 import org.junit.Test;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -20,7 +20,7 @@ public class HelloServiceTest {
         HelloService SUT = new HelloService(mockRepository); //system under test
 
         //when
-        var result = SUT.prepareGreeting(null, "-1");
+        var result = SUT.prepareGreeting(null, -1);
 
         //then
         assertEquals(WELCOME + " " + HelloService.FALLBACK_NAME + "?!", result);
@@ -35,7 +35,7 @@ public class HelloServiceTest {
         var name = "test";
 
         //when
-        var result = SUT.prepareGreeting(name, "-1");
+        var result = SUT.prepareGreeting(name, -1);
 
         //then
         assertEquals(WELCOME + " " + name + "?!", result);
@@ -53,7 +53,7 @@ public class HelloServiceTest {
         HelloService SUT = new HelloService(mockRepository); //system under test
 
         //when
-        var result = SUT.prepareGreeting(null, "-1");
+        var result = SUT.prepareGreeting(null, -1);
 
         //then
         assertEquals(HelloService.FALLBACK_LANG.getWelcomeMsg() + " " + HelloService.FALLBACK_NAME + "?!", result);
@@ -74,20 +74,20 @@ public class HelloServiceTest {
         assertEquals(FALLBACK_ID_WELCOME + " " + HelloService.FALLBACK_NAME + "?!", result);
     }
 
-    @Test
-    public void test_prepareGreeting_textLang_returnsGreetingWithFallbackIdLang() {
-
-        // given
-        String fallbackIdWelcom = "Holla";
-        var mockRepository = fallbackLangIdRepository();
-        HelloService SUT = new HelloService(mockRepository); //system under test
-
-        //when
-        var result = SUT.prepareGreeting(null, "abc");
-
-        //then
-        assertEquals(FALLBACK_ID_WELCOME + " " + HelloService.FALLBACK_NAME + "?!", result);
-    }
+//    @Test
+//    public void test_prepareGreeting_textLang_returnsGreetingWithFallbackIdLang() {
+//
+//        // given
+//        String fallbackIdWelcom = "Holla";
+//        var mockRepository = fallbackLangIdRepository();
+//        HelloService SUT = new HelloService(mockRepository); //system under test
+//
+//        //when
+//        var result = SUT.prepareGreeting(null, "abc");
+//
+//        //then
+//        assertEquals(FALLBACK_ID_WELCOME + " " + HelloService.FALLBACK_NAME + "?!", result);
+//    }
 
     private LangRepository fallbackLangIdRepository (){
         return new LangRepository() {
