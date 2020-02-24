@@ -8,7 +8,7 @@ It consists of two pages:
 
 >Second displays a welcome message in the header and the to-do list below.
 
-####Usage
+###Usage
 After starting the application, the first page will be display. 
 There you should write your nickname and choose the language of the welcome massage.
 Then press the *submit* button to load the next page.
