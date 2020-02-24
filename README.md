@@ -8,7 +8,9 @@ It consists of two pages:
 
 >Second displays a welcome message in the header and the to-do list below.
 
+
 **Usage**
+
 After starting the application, the first page will be display. 
 There you should write your nickname and choose the language of the welcome massage.
 Then press the *submit* button to load the next page.
@@ -16,6 +18,7 @@ The header displays the welcome message along with the nickname.
 Below is the to-do list for self-management.
 It is possible to add new tasks or to mark those that have been done.
 Each change in the list is automatically saved in the database.
+
 
 **Creation purpose**
 
